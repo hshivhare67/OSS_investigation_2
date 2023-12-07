@@ -1,0 +1,62 @@
+cc_library_static {
+    name: "libFraunhoferAAC",
+    vendor_available: true,
+    srcs: [
+        "libAACdec/src/*.cpp",
+        "libAACenc/src/*.cpp",
+        "libPCMutils/src/*.cpp",
+        "libFDK/src/*.cpp",
+        "libSYS/src/*.cpp",
+        "libMpegTPDec/src/*.cpp",
+        "libMpegTPEnc/src/*.cpp",
+        "libSBRdec/src/*.cpp",
+        "libSBRenc/src/*.cpp",
+        "libArithCoding/src/*.cpp",
+        "libDRCdec/src/*.cpp",
+        "libSACdec/src/*.cpp",
+        "libSACenc/src/*.cpp",
+    ],
+    cflags: [
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-Wno-#warnings",
+        "-Wuninitialized",
+        "-Wno-self-assign",
+        "-Wno-implicit-fallthrough",
+    ],
+    
+
+    sanitize: {
+//FW_IntSan HCL COMMENT - S
+        //misc_undefined:[
+        //   "unsigned-integer-overflow",
+        //   "signed-integer-overflow",
+//FW_IntSan HCL COMMENT - E
+//FW_BoundSan HCL COMMENT - S
+        //   "bounds",
+//FW_BoundSan HCL COMMENT - E
+        //],
+        // Enable CFI if this becomes a shared library.
+        // cfi: true,
+    },
+
+
+    shared_libs: [
+        "liblog",
+    ],
+    export_include_dirs: [
+        "libAACdec/include",
+        "libAACenc/include",
+        "libPCMutils/include",
+        "libFDK/include",
+        "libSYS/include",
+        "libMpegTPDec/include",
+        "libMpegTPEnc/include",
+        "libSBRdec/include",
+        "libSBRenc/include",
+        "libArithCoding/include",
+        "libDRCdec/include",
+        "libSACdec/include",
+        "libSACenc/include",
+    ],
+}
